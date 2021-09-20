@@ -10,24 +10,42 @@ const SignupContainer = styled.div`
 const SignupForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
+
+const FormGroup = styled.div`
+  display: flex;
+`;
+
+const Label = styled.label``;
 
 const Signup = () => (
   <SignupContainer>
     <SignupForm>
-      <span>
-        Name: <input type="text" name="user[username]" />
-      </span>
-      <span>
-        Email: <input type="text" name="user[email]" />
-      </span>
-      <span>
-        Password: <input type="password" name="user[password]" />
-      </span>
-      <span>
-        Confirm Password:{' '}
-        <input type="password" name="user[passwordConfirmation]" />
-      </span>
+      <FormGroup>
+        <Label for="signup_name">Name: </Label>
+        <input type="text" id="signup_name" name="user[username]" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="signup_email">Email: </Label>
+        <input type="text" id="signup_email" name="user[email]" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="signup_password">Password: </Label>
+        <input type="password" id="signup_password" name="user[password]" />
+      </FormGroup>
+
+      <FormGroup>
+        <Label for="signup_passwordConfirmation">Confirm Password: </Label>
+        <input
+          type="password"
+          id="signup_passwordConfirmation"
+          name="user[passwordConfirmation]"
+        />
+      </FormGroup>
+
       <button type="submit">Signup</button>
     </SignupForm>
   </SignupContainer>
