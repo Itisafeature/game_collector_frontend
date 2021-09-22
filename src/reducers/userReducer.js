@@ -20,7 +20,6 @@ export const user = createSlice({
     },
     [signupUser.rejected]: (state, action) => {
       state.error = true;
-      debugger;
       state.errorMsg = '';
     },
   },
