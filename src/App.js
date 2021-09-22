@@ -1,13 +1,20 @@
+import { Switch, Route } from 'react-router';
 import './App.css';
 import Signup from './auth/Signup';
+import NavBarContainer from './NavBar';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
+      <NavBarContainer />
       <header className="App-header">Game Collector</header>
-      <Signup />
+      <Switch>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
