@@ -7,7 +7,6 @@ const App = () => {
   return (
     <div className="App">
       <NavBarContainer />
-      <header className="App-header">Game Collector</header>
       <Switch>
         <Route exact path="/signup">
           <Signup />
