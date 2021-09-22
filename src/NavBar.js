@@ -22,8 +22,12 @@ const StyledLink = styled(NavLink)`
 const NavBar = ({ loggedIn }) => {
   return (
     <NavBarContainer>
-      <StyledLink to="/login">Login</StyledLink>
-      <StyledLink to="/signup">Signup</StyledLink>
+      {loggedIn ? null : (
+        <>
+          <StyledLink to="/login">Login</StyledLink>
+          <StyledLink to="/signup">Signup</StyledLink>
+        </>
+      )}
     </NavBarContainer>
   );
 };

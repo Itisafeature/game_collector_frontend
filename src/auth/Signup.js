@@ -49,10 +49,12 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     dispatch(
-      signupUser({ user: { username, email, password, passwordConfirmation } })
+      signupUser({
+        user: { username, email, password, passwordConfirmation },
+      })
     );
   };
 
@@ -61,7 +63,7 @@ const Signup = () => {
       <PopupDiv>
         <SignupForm onSubmit={handleSubmit}>
           <FormGroup>
-            <Label for="signup_username">Username:</Label>
+            <Label htmlFor="signup_username">Username:</Label>
             <Input
               type="text"
               id="signup_username"
@@ -72,7 +74,7 @@ const Signup = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label for="signup_email">Email:</Label>
+            <Label htmlFor="signup_email">Email:</Label>
             <Input
               type="text"
               id="signup_email"
@@ -83,7 +85,7 @@ const Signup = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label for="signup_password">Password:</Label>
+            <Label htmlFor="signup_password">Password:</Label>
             <Input
               type="password"
               id="signup_password"
@@ -94,7 +96,9 @@ const Signup = () => {
           </FormGroup>
 
           <FormGroup>
-            <Label for="signup_passwordConfirmation">Confirm Password:</Label>
+            <Label htmlFor="signup_passwordConfirmation">
+              Confirm Password:
+            </Label>
             <Input
               type="password"
               id="signup_passwordConfirmation"

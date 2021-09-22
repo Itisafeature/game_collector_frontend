@@ -4,7 +4,7 @@ import { signupUser } from '../actions/userActions';
 export const user = createSlice({
   name: 'user',
   initialState: {
-    current_user: null,
+    currentUser: null,
     loading: false,
     error: false,
     errorMsg: '',
@@ -12,15 +12,18 @@ export const user = createSlice({
   reducers: {},
   extraReducers: {
     [signupUser.pending]: (state, action) => {
-      state.current_user = action.payload.data;
+      state.loading = true;
     },
     [signupUser.fulfilled]: (state, action) => {
-      state.current_user = action.payload.data;
+      state.currentUser = action.payload.data;
       state.loading = false;
+      state.error = false;
+      state.errMsg = '';
     },
     [signupUser.rejected]: (state, action) => {
       state.error = true;
-      state.errorMsg = '';
+      state.loading = false;
+      state.errorMsg = action.payload;
     },
   },
 });
