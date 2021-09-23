@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { signupUser } from '../actions/userActions';
 
 const SignupContainer = styled.div`
-  height: 100%;
+  height: 90%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SignupHeader = styled.header`
+  margin: 5% 0 2% 0;
+  font-size: 1.2em;
+  color: pink;
 `;
 
 const PopupDiv = styled.div`
   height: 30%;
   width: 30%;
-  position: fixed;
   z-index: 1;
   background-color: white;
   box-shadow: 0 0 5px 5px red;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 `;
 
 const SignupForm = styled.form`
@@ -60,6 +65,7 @@ const Signup = () => {
 
   return (
     <SignupContainer>
+      <SignupHeader>Signup to keep track of your games!</SignupHeader>
       <PopupDiv>
         <SignupForm onSubmit={handleSubmit}>
           <FormGroup>
