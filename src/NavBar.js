@@ -1,6 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from './actions/userActions';
 
 const NavBarContainer = styled.div`
   display: flex;
@@ -19,7 +21,25 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
+const StyledLogoutSpan = styled.span`
+  text-decoration: none;
+  color: pink;
+  margin-right: 10px;
+
+  &:hover {
+    color: red;
+  }
+`;
+
 const NavBar = ({ loggedIn }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutUser(null));
+    history.push('/'); // Fix this
+  };
+
   return (
     <NavBarContainer>
       {loggedIn ? null : (
@@ -28,8 +48,12 @@ const NavBar = ({ loggedIn }) => {
           <StyledLink to="/signup">Signup</StyledLink>
         </>
       )}
+
+      {!loggedIn ? null : (
+        <StyledLogoutSpan onClick={handleLogout}>Logout</StyledLogoutSpan>
+      )}
     </NavBarContainer>
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);
