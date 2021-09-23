@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signupUser } from '../actions/userActions';
+import { loginUser, signupUser } from '../actions/userActions';
 
 export const user = createSlice({
   name: 'user',
@@ -24,6 +24,20 @@ export const user = createSlice({
       state.error = true;
       state.loading = false;
       state.errorMsg = action.payload;
+    },
+    [loginUser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [loginUser.fulfilled]: (state, action) => {
+      state.currentUser = action.payload.data;
+      state.loading = false;
+      state.error = false;
+      state.errMsg = '';
+    },
+    [loginUser.rejected]: (state, action) => {
+      state.error = true;
+      state.loading = false;
+      state.errorMsg = 'Invalid Username/Password.';
     },
   },
 });

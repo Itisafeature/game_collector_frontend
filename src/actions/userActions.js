@@ -12,3 +12,15 @@ export const signupUser = createAsyncThunk(
     }
   }
 );
+
+export const loginUser = createAsyncThunk(
+  '/users/login',
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/login', formData);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data.errMsg);
+    }
+  }
+);
