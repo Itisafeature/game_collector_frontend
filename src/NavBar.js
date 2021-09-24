@@ -25,6 +25,7 @@ const StyledLogoutSpan = styled.span`
   text-decoration: none;
   color: pink;
   margin-right: 10px;
+  cursor: pointer;
 
   &:hover {
     color: red;

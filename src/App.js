@@ -4,6 +4,7 @@ import './App.css';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
+import PrivateRoute from './routes/PrivateRoute';
 import Temp from './Temp';
 
 const App = () => {
@@ -19,9 +20,9 @@ const App = () => {
         <Route exact path="/login">
           <Login />
         </Route>
-        <Route exact path="/">
-          <Temp />
-        </Route>
+        <PrivateRoute currentUser={currentUser} exact path="/">
+          <Temp currentUser={currentUser} />
+        </PrivateRoute>
       </Switch>
     </div>
   );

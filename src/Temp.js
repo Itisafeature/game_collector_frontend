@@ -1,5 +1,5 @@
-const Temp = () => {
-  return <div>Hello World</div>;
+const Temp = ({ currentUser }) => {
+  return <div>Hello {currentUser.username}</div>;
 };
 
 export default Temp;
