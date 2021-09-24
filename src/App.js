@@ -4,6 +4,7 @@ import './App.css';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
+import Temp from './Temp';
 
 const App = () => {
   const currentUser = useSelector(state => state.users.currentUser);
@@ -17,6 +18,9 @@ const App = () => {
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/">
+          <Temp />
         </Route>
       </Switch>
     </div>

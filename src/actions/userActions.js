@@ -28,12 +28,10 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
   '/users/logout',
   async (data, { rejectWithValue }) => {
-    console.log('here4');
     try {
       const response = await axios.get('/logout');
       return response.data;
     } catch (err) {
-      console.log('here3');
       return rejectWithValue(err.response.data.errMsg);
     }
   }
