@@ -51,7 +51,10 @@ const NavBar = ({ loggedIn }) => {
       )}
 
       {!loggedIn ? null : (
-        <StyledLogoutSpan onClick={handleLogout}>Logout</StyledLogoutSpan>
+        <>
+          <StyledLink to="/home">Home</StyledLink>
+          <StyledLogoutSpan onClick={handleLogout}>Logout</StyledLogoutSpan>
+        </>
       )}
     </NavBarContainer>
   );

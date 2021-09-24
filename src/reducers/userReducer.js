@@ -9,7 +9,11 @@ export const user = createSlice({
     error: false,
     errorMsg: '',
   },
-  reducers: {},
+  reducers: {
+    remove: state => {
+      state.currentUser = null;
+    },
+  },
   extraReducers: {
     [signupUser.pending]: (state, action) => {
       state.loading = true;
@@ -43,6 +47,7 @@ export const user = createSlice({
       state.loading = true;
     },
     [logoutUser.fulfilled]: (state, action) => {
+      console.log('action');
       state.currentUser = null;
       state.loading = false;
       state.error = false;
@@ -56,4 +61,5 @@ export const user = createSlice({
   },
 });
 
+export const { remove } = user.actions;
 export default user.reducer;
