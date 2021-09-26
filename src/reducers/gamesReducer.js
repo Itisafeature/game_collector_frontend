@@ -4,7 +4,7 @@ import { fetchGames } from '../actions/gameActions';
 export const game = createSlice({
   name: 'game',
   initialState: {
-    games: [],
+    data: [],
   },
   reducers: {},
   extraReducers: {
@@ -12,7 +12,7 @@ export const game = createSlice({
       state.loading = true;
     },
     [fetchGames.fulfilled]: (state, action) => {
-      state.currentUser = action.payload.data;
+      state.data = action.payload.data;
       state.loading = false;
       state.error = false;
       state.errMsg = '';

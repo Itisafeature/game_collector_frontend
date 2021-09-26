@@ -9,8 +9,9 @@ import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
 import PrivateRoute from './routes/PrivateRoute';
 import Temp from './Temp';
-import Home from './Users/Home';
+import Home from './users/Home';
 import { remove } from './reducers/userReducer';
+import GamesContainer from './games/GamesContainer';
 
 const App = () => {
   const currentUser = useSelector(state => state.users.currentUser);
@@ -47,6 +48,9 @@ const App = () => {
         </PrivateRoute>
         <PrivateRoute currentUser={currentUser} exact path="/home">
           <Home currentUser={currentUser}></Home>
+        </PrivateRoute>
+        <PrivateRoute currentUser={currentUser} exact path="/games">
+          <GamesContainer currentUser={currentUser}></GamesContainer>
         </PrivateRoute>
       </Switch>
     </div>
