@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router';
@@ -7,7 +6,7 @@ import GamesIndex from './GamesIndex';
 
 const GamesContainer = ({ currentUser }) => {
   const dispatch = useDispatch();
-  const games = useSelector(state => state.games);
+  const games = useSelector(state => state.games.data);
 
   useEffect(() => {
     dispatch(fetchGames());
@@ -16,7 +15,7 @@ const GamesContainer = ({ currentUser }) => {
   return (
     <Switch>
       <Route exact path="/games">
-        <GamesIndex />
+        <GamesIndex games={games} />
       </Route>
     </Switch>
   );
