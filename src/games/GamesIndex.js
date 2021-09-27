@@ -1,32 +1,42 @@
+import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import GameIndexDiv from './GameIndexDiv';
 
 const GamesListContainer = styled.div`
   height: 90%;
-  display: flex;
-  justify-content: space-around;
 `;
 
 const GamesColumn = styled.div`
-  height: 100%;
+  min-height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  & > div {
+    flex: 50%;
+  }
 `;
 
-const GamesIndex = ({ games }) => (
-  <GamesListContainer>
-    <GamesColumn>
-      {games.slice(0, 4).map(game => (
-        <GameIndexDiv game={game} />
-      ))}
-    </GamesColumn>
-    <GamesColumn>
-      {games.slice(4, 8).map(game => (
-        <GameIndexDiv game={game} />
-      ))}
-    </GamesColumn>
-  </GamesListContainer>
-);
+const StyledScroll = styled(InfiniteScroll)`
+  height: 100%;
+`;
+
+const GamesIndex = ({ games }) => {
+  const [currentEnd, setcurrentEnd] = useState(7);
+
+  return (
+    <GamesListContainer>
+      <StyledScroll dataLength={games.length}>
+        <GamesColumn>
+          {games.slice(0, 8).map(game => (
+            <GameIndexDiv game={game} />
+          ))}
+        </GamesColumn>
+      </StyledScroll>
+    </GamesListContainer>
+  );
+};
 
 export default GamesIndex;
