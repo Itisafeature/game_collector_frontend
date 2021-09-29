@@ -4,15 +4,29 @@ import { fetchGames } from '../actions/gameActions';
 export const game = createSlice({
   name: 'game',
   initialState: {
-    data: [],
+    allGames: [],
+    shownGames: [],
+    totalCount: 0,
   },
-  reducers: {},
+  reducers: {
+    showMoreGames: state => {
+      state.shownGames = [
+        ...state.shownGames,
+        ...state.allGames.slice(
+          state.shownGames.length,
+          state.shownGames.length + 8
+        ),
+      ];
+    },
+  },
   extraReducers: {
     [fetchGames.pending]: (state, action) => {
       state.loading = true;
     },
     [fetchGames.fulfilled]: (state, action) => {
-      state.data = action.payload.data;
+      state.allGames = action.payload.data;
+      state.shownGames = action.payload.data.slice(0, 8);
+      state.totalCount = action.payload.data.length;
       state.loading = false;
       state.error = false;
       state.errMsg = '';
@@ -25,5 +39,5 @@ export const game = createSlice({
   },
 });
 
-// export const { remove } = user.actions;
+export const { showMoreGames } = game.actions;
 export default game.reducer;

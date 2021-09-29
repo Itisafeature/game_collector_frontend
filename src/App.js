@@ -2,13 +2,12 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './App.css';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
 import PrivateRoute from './routes/PrivateRoute';
-import Temp from './Temp';
 import Home from './users/Home';
 import { remove } from './reducers/userReducer';
 import GamesContainer from './games/GamesContainer';
@@ -43,9 +42,6 @@ const App = () => {
         <Route exact path="/login">
           <Login />
         </Route>
-        <PrivateRoute currentUser={currentUser} exact path="/">
-          <Temp currentUser={currentUser} />
-        </PrivateRoute>
         <PrivateRoute currentUser={currentUser} exact path="/home">
           <Home currentUser={currentUser}></Home>
         </PrivateRoute>
