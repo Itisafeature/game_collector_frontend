@@ -4,6 +4,10 @@ body,
   height: 100%;
 }
 
+/* html {
+  overscroll-behavior: none;
+} */
+
 body {
   margin: 0;
   box-sizing: border-box;
@@ -12,6 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
 }
 
 code {

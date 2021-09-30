@@ -8,7 +8,6 @@ import Login from './auth/Login';
 import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
 import PrivateRoute from './routes/PrivateRoute';
-import Temp from './Temp';
 import Home from './users/Home';
 import { remove } from './reducers/userReducer';
 import GamesContainer from './games/GamesContainer';
@@ -43,9 +42,6 @@ const App = () => {
         <Route exact path="/login">
           <Login history={history} />
         </Route>
-        <PrivateRoute currentUser={currentUser} exact path="/">
-          <Temp currentUser={currentUser} />
-        </PrivateRoute>
         <PrivateRoute currentUser={currentUser} exact path="/home">
           <Home currentUser={currentUser}></Home>
         </PrivateRoute>

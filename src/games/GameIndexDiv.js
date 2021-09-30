@@ -4,8 +4,6 @@ import styled from 'styled-components';
 const GameDiv = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
 `;
 
 const StyledImg = styled.img`
@@ -16,12 +14,18 @@ const StyledImg = styled.img`
   height: auto;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: red;
+  margin: auto;
+`;
+
 const GameIndexDiv = ({ game }) => (
   <GameDiv>
-    <h3>{game.title}</h3>
-    <Link to={`games/${game.id}`}>
+    <StyledLink to={`games/${game.id}`}>
+      <h3>{game.title}</h3>
       <StyledImg src={game.image} alt={game.title}></StyledImg>
-    </Link>
+    </StyledLink>
   </GameDiv>
 );
 
