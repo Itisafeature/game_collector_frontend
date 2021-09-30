@@ -5,8 +5,6 @@ import GameIndexDiv from './GameIndexDiv';
 
 const GamesListContainer = styled.div`
   height: 100%;
-  /* flex: 1; */
-  overflow-y: scroll;
 
   & .infinite-scroll-component__outerdiv {
     /* height: 100%; */
@@ -15,7 +13,7 @@ const GamesListContainer = styled.div`
 `;
 
 const GamesColumn = styled.div`
-  /* min-height: 100%; */
+  height: 100%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -29,7 +27,7 @@ const GamesIndex = ({ games, getMoreShownGames, totalGamesCount, hasMore }) => {
   return (
     <GamesListContainer id="games-list-container">
       <InfiniteScroll
-        scrollableTarget="games-list-container"
+        // scrollableTarget="games-list-container"
         dataLength={games.length}
         hasMore={hasMore}
         next={getMoreShownGames}
