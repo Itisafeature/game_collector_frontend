@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import styled from 'styled-components';
 import { loginUser } from '../actions/userActions';
 
@@ -47,7 +48,7 @@ const Input = styled.input`
   width: 50%;
 `;
 
-const Login = () => {
+const Login = ({ history }) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,7 +59,7 @@ const Login = () => {
       loginUser({
         user: { email, password },
       })
-    );
+    ).then(() => history.push('/games'));
   };
 
   return (

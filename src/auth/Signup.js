@@ -47,7 +47,7 @@ const Input = styled.input`
   width: 50%;
 `;
 
-const Signup = () => {
+const Signup = ({ history }) => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -60,7 +60,7 @@ const Signup = () => {
       signupUser({
         user: { username, email, password, passwordConfirmation },
       })
-    );
+    ).then(() => history.push('/games'));
   };
 
   return (

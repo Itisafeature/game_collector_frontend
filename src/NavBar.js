@@ -38,7 +38,7 @@ const NavBar = ({ loggedIn }) => {
 
   const handleLogout = () => {
     dispatch(logoutUser(null));
-    history.push('/'); // Fix this
+    history.push('/login'); // Fix this
   };
 
   return (

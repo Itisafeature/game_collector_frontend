@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './App.css';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
@@ -38,10 +38,10 @@ const App = () => {
       <NavBarContainer loggedIn={currentUser ? true : false} />
       <Switch>
         <Route exact path="/signup">
-          <Signup />
+          <Signup history={history} />
         </Route>
         <Route exact path="/login">
-          <Login />
+          <Login history={history} />
         </Route>
         <PrivateRoute currentUser={currentUser} exact path="/">
           <Temp currentUser={currentUser} />
