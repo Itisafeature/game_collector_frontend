@@ -3,6 +3,7 @@ import { NavLink, useHistory, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from './actions/userActions';
+import { clearGames } from './reducers/gamesReducer';
 
 const NavBarContainer = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ const NavBar = ({ loggedIn }) => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logoutUser(null));
+    dispatch(logoutUser(null)).then(() => dispatch(clearGames()));
     history.push('/login'); // Fix this
   };
 

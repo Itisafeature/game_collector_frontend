@@ -2,15 +2,16 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './App.css';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
 import PrivateRoute from './routes/PrivateRoute';
-import Home from './users/Home';
 import { remove } from './reducers/userReducer';
 import GamesContainer from './games/GamesContainer';
+import GameShow from './games/GameShow';
+import { fetchGames } from './actions/gameActions';
 
 const App = props => {
   const currentUser = useSelector(state => state.users.currentUser);
@@ -21,6 +22,7 @@ const App = props => {
     const checkToken = async () => {
       try {
         await axios.get('/verifyToken');
+        dispatch(fetchGames());
       } catch (err) {
         dispatch(remove());
         history.push('/login');
@@ -31,8 +33,6 @@ const App = props => {
       checkToken();
     }
   }, [currentUser, history, dispatch]);
-
-  debugger;
 
   return (
     <div className="App">
@@ -45,16 +45,19 @@ const App = props => {
           <Login history={history} />
         </Route>
 
-        <PrivateRoute currentUser={currentUser} exact path="/home">
-          <Home currentUser={currentUser}></Home>
-        </PrivateRoute>
-        <PrivateRoute currentUser={currentUser} exact path="/games">
-          <GamesContainer currentUser={currentUser}></GamesContainer>
-        </PrivateRoute>
+        <PrivateRoute
+          component={GamesContainer}
+          currentUser={currentUser}
+          exact
+          path="/games"
+        />
 
-        <PrivateRoute currentUser={currentUser} exact path="/games/:slug">
-          {/* <GameShow slug={} /> */}
-        </PrivateRoute>
+        <PrivateRoute
+          component={GameShow}
+          currentUser={currentUser}
+          exact
+          path="/games/:slug"
+        />
       </Switch>
     </div>
   );

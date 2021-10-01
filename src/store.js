@@ -4,18 +4,25 @@ import storage from 'redux-persist/lib/storage';
 import gamesReducer from './reducers/gamesReducer';
 import userReducer from './reducers/userReducer';
 
-const persistConfig = {
+const persistConfigUsers = {
   key: 'user',
   storage,
   whitelist: ['currentUser'],
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const persistConfigGames = {
+  key: 'game',
+  storage,
+  whitelist: ['allGames'],
+};
+
+const persistedUsersReducer = persistReducer(persistConfigUsers, userReducer);
+const persistedGamesReducer = persistReducer(persistConfigGames, gamesReducer);
 
 export const store = configureStore({
   reducer: {
-    users: persistedReducer,
-    games: gamesReducer,
+    users: persistedUsersReducer,
+    games: persistedGamesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

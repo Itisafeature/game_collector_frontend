@@ -1,12 +1,12 @@
 import { Redirect, Route } from 'react-router';
 
-const PrivateRoute = ({ children, currentUser, ...rest }) => {
+const PrivateRoute = ({ component: Component, currentUser, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={({ match, location }) =>
         currentUser ? (
-          children
+          <Component match={match} location={location} />
         ) : (
           <Redirect
             to={{

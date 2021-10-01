@@ -47,7 +47,6 @@ export const user = createSlice({
       state.loading = true;
     },
     [logoutUser.fulfilled]: (state, action) => {
-      console.log('action');
       state.currentUser = null;
       state.loading = false;
       state.error = false;

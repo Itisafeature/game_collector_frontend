@@ -1,14 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchGames } from '../actions/gameActions';
 
+const INITIAL_STATE = {
+  allGames: [],
+  shownGames: [],
+  totalCount: 0,
+};
+
 export const game = createSlice({
   name: 'game',
-  initialState: {
-    allGames: [],
-    shownGames: [],
-    totalCount: 0,
-  },
+  initialState: INITIAL_STATE,
   reducers: {
+    clearGames: state => {
+      state = INITIAL_STATE;
+    },
     showMoreGames: state => {
       state.shownGames = [
         ...state.shownGames,
@@ -39,5 +44,5 @@ export const game = createSlice({
   },
 });
 
-export const { showMoreGames } = game.actions;
+export const { showMoreGames, clearGames } = game.actions;
 export default game.reducer;
