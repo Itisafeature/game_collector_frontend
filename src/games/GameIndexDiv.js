@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const GameDiv = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ const StyledLink = styled(Link)`
 
 const GameIndexDiv = ({ game }) => (
   <GameDiv>
-    <StyledLink to={`games/${game.id}`}>
+    <StyledLink to={`games/${game.slug}`}>
       <h3>{game.title}</h3>
       <StyledImg src={game.image} alt={game.title}></StyledImg>
     </StyledLink>

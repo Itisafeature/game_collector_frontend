@@ -27,12 +27,9 @@ const GamesIndex = ({ games, getMoreShownGames, totalGamesCount, hasMore }) => {
   return (
     <GamesListContainer id="games-list-container">
       <InfiniteScroll
-        // scrollableTarget="games-list-container"
         dataLength={games.length}
         hasMore={hasMore}
         next={getMoreShownGames}
-        scrollThreshold="0"
-        // style={{ height: '100%', overflow: 'auto' }}
       >
         <GamesColumn>
           {games.map(game => (
