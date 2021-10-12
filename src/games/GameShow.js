@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ChartLegend from './ChartLegend';
 import ChartSVG from './ChartSVG';
+import OwnedGameForm from './OwnedGameForm';
 
 const ShowContainerDiv = styled.div`
   display: flex;
@@ -10,10 +11,12 @@ const ShowContainerDiv = styled.div`
   align-items: center;
 `;
 
-const ChartDiv = styled.div`
+const ContentDiv = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+const StyledButton = styled.button``;
 
 const GameShow = ({ match }) => {
   const game = useSelector(state =>
@@ -44,7 +47,7 @@ const GameShow = ({ match }) => {
   return (
     <ShowContainerDiv>
       <h1>{game.title}</h1>
-      <ChartDiv>
+      <ContentDiv>
         <ChartLegend ratings={ratingsArr} />
         <ChartSVG
           width={width}
@@ -52,7 +55,9 @@ const GameShow = ({ match }) => {
           ratingsArr={ratingsArr}
           game={game}
         />
-      </ChartDiv>
+        <StyledButton>Add to Wanted Games</StyledButton>
+        <OwnedGameForm gameId={game.id} StyledButton={StyledButton} />
+      </ContentDiv>
     </ShowContainerDiv>
   );
 };
