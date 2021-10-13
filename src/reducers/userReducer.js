@@ -4,7 +4,13 @@ import { loginUser, signupUser, logoutUser } from '../actions/userActions';
 export const user = createSlice({
   name: 'user',
   initialState: {
-    currentUser: null,
+    currentUser: {
+      data: null,
+      games: {
+        ownedGames: [],
+        wantedGames: [],
+      },
+    },
     loading: false,
     error: false,
     errorMsg: '',
@@ -19,7 +25,7 @@ export const user = createSlice({
       state.loading = true;
     },
     [signupUser.fulfilled]: (state, action) => {
-      state.currentUser = action.payload.data;
+      state.currentUser.data = action.payload.data;
       state.loading = false;
       state.error = false;
       state.errMsg = '';

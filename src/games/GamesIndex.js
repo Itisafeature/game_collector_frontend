@@ -1,15 +1,9 @@
-import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import GameIndexDiv from './GameIndexDiv';
 
 const GamesListContainer = styled.div`
   height: 100%;
-
-  & .infinite-scroll-component__outerdiv {
-    /* height: 100%; */
-    /* overflow: auto; */
-  }
 `;
 
 const GamesColumn = styled.div`
@@ -23,7 +17,7 @@ const GamesColumn = styled.div`
   }
 `;
 
-const GamesIndex = ({ games, getMoreShownGames, totalGamesCount, hasMore }) => {
+const GamesIndex = ({ games, getMoreShownGames, hasMore }) => {
   return (
     <GamesListContainer id="games-list-container">
       <InfiniteScroll
