@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from "react";
+import styled from "styled-components";
 
 const CurrencySpan = styled.span`
   display: inline-block;
@@ -9,20 +9,18 @@ const CurrencySpan = styled.span`
   }
   &:before {
     position: absolute;
-    content: '$';
+    content: "$";
     left: 5px;
     top: 2px;
   }
 `;
 
-const OwnedGameForm = ({ gameId, StyledButton }) => {
-  const [purchasePrice, setPurchasePrice] = useState(null);
-
-  const handleSubmit = () => {};
+const OwnedGameForm = ({ gameId, StyledButton, handleAddGameToList }) => {
+  const [purchasePrice, setPurchasePrice] = useState("");
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label for="purchasePrice">Purchase Price</label>
+    <form data-type="owned" onSubmit={handleAddGameToList}>
+      <label htmlFor="purchasePrice">Purchase Price</label>
       <CurrencySpan>
         <input
           id="purchasePrice"
@@ -31,7 +29,7 @@ const OwnedGameForm = ({ gameId, StyledButton }) => {
           min="0"
           step=".01"
           value={purchasePrice}
-          onChange={e => setPurchasePrice(e.target.value)}
+          onChange={(e) => setPurchasePrice(e.target.value)}
         />
       </CurrencySpan>
       <StyledButton>Add to Owned Games</StyledButton>

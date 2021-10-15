@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import ChartLegend from './ChartLegend';
-import ChartSVG from './ChartSVG';
-import OwnedGameForm from './OwnedGameForm';
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import ChartLegend from "./ChartLegend";
+import ChartSVG from "./ChartSVG";
+import OwnedGameForm from "./OwnedGameForm";
 
 const ShowContainerDiv = styled.div`
   display: flex;
@@ -18,13 +18,14 @@ const ContentDiv = styled.div`
 const StyledButton = styled.button``;
 
 const GameShow = ({ match }) => {
-  const game = useSelector(state =>
-    state.games.allGames.find(game => game.slug === match.params.slug)
+  const dispatch = useDispatch();
+  const game = useSelector((state) =>
+    state.games.allGames.find((game) => game.slug === match.params.slug)
   );
 
   const formatRatings = () => {
     const { id, gameId, total, ...ratings } = game.rating;
-    const colors = ['orange', 'red', 'purple', 'green', 'orange'];
+    const colors = ["orange", "red", "purple", "green", "orange"];
     let ratingsArr = [];
 
     let colorIndex = 0;
@@ -43,6 +44,10 @@ const GameShow = ({ match }) => {
   const half = width / 2;
   const ratingsArr = formatRatings();
 
+  const handleAddGameToList = (e) => {
+    // e.target.dataset.type === 'wanted' ? dispatch(wanted) : dispatch(owned)
+  };
+
   return (
     <ShowContainerDiv>
       <h1>{game.title}</h1>
@@ -54,8 +59,14 @@ const GameShow = ({ match }) => {
           ratingsArr={ratingsArr}
           game={game}
         />
-        <StyledButton>Add to Wanted Games</StyledButton>
-        <OwnedGameForm gameId={game.id} StyledButton={StyledButton} />
+        <StyledButton data-type="wanted" onClick={handleAddGameToList}>
+          Add to Wanted Games
+        </StyledButton>
+        <OwnedGameForm
+          handleAddGameToList={handleAddGameToList}
+          gameId={game.id}
+          StyledButton={StyledButton}
+        />
       </ContentDiv>
     </ShowContainerDiv>
   );
