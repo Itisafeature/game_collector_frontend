@@ -31,7 +31,7 @@ export const user = createSlice({
         ...state,
         loading: false,
         error: false,
-        errMsg: '',
+        errorMsg: '',
         currentUser: { ...state.currentUser, data: action.payload.data },
       };
     },
@@ -45,11 +45,16 @@ export const user = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       return {
-        ...state,
         loading: false,
         error: false,
-        errMsg: '',
-        currentUser: { ...state.currentUser, data: action.payload.data },
+        errorMsg: '',
+        currentUser: {
+          data: action.payload.data,
+          games: {
+            ownedGames: action.payload.games.ownedGames,
+            wantedGames: action.payload.games.wantedGames,
+          },
+        },
       };
     },
     [loginUser.rejected]: (state, action) => {
