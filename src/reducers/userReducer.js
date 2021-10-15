@@ -1,23 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser, signupUser, logoutUser } from '../actions/userActions';
 
+const INITIAL_STATE = {
+  currentUser: {
+    data: null,
+    games: {
+      ownedGames: [],
+      wantedGames: [],
+    },
+  },
+  loading: false,
+  error: false,
+  errorMsg: '',
+};
+
 export const user = createSlice({
   name: 'user',
-  initialState: {
-    currentUser: {
-      data: null,
-      games: {
-        ownedGames: [],
-        wantedGames: [],
-      },
-    },
-    loading: false,
-    error: false,
-    errorMsg: '',
-  },
+  initialState: INITIAL_STATE,
   reducers: {
-    remove: state => {
-      state.currentUser = null;
+    removeUser: state => {
+      state = INITIAL_STATE;
     },
   },
   extraReducers: {
@@ -25,10 +27,13 @@ export const user = createSlice({
       state.loading = true;
     },
     [signupUser.fulfilled]: (state, action) => {
-      state.currentUser.data = action.payload.data;
-      state.loading = false;
-      state.error = false;
-      state.errMsg = '';
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        errMsg: '',
+        currentUser: { ...state.currentUser, data: action.payload.data },
+      };
     },
     [signupUser.rejected]: (state, action) => {
       state.error = true;
@@ -39,10 +44,13 @@ export const user = createSlice({
       state.loading = true;
     },
     [loginUser.fulfilled]: (state, action) => {
-      state.currentUser = action.payload.data;
-      state.loading = false;
-      state.error = false;
-      state.errMsg = '';
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        errMsg: '',
+        currentUser: { ...state.currentUser, data: action.payload.data },
+      };
     },
     [loginUser.rejected]: (state, action) => {
       state.error = true;
@@ -53,10 +61,7 @@ export const user = createSlice({
       state.loading = true;
     },
     [logoutUser.fulfilled]: (state, action) => {
-      state.currentUser = null;
-      state.loading = false;
-      state.error = false;
-      state.errMsg = '';
+      return INITIAL_STATE;
     },
     [logoutUser.rejected]: (state, action) => {
       state.error = true;
@@ -66,5 +71,5 @@ export const user = createSlice({
   },
 });
 
-export const { remove } = user.actions;
+export const { removeUser } = user.actions;
 export default user.reducer;

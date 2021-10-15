@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchGames } from '../actions/gameActions';
+import { logoutUser } from '../actions/userActions';
 
 const INITIAL_STATE = {
   allGames: [],
@@ -11,6 +12,9 @@ export const game = createSlice({
   name: 'game',
   initialState: INITIAL_STATE,
   reducers: {
+    removeGames: state => {
+      state = INITIAL_STATE;
+    },
     clearGames: state => {
       state = INITIAL_STATE;
     },
@@ -41,8 +45,11 @@ export const game = createSlice({
       state.loading = false;
       state.errorMsg = action.payload;
     },
+    [logoutUser.fulfilled]: (state, action) => {
+      state = INITIAL_STATE;
+    },
   },
 });
 
-export const { showMoreGames, clearGames } = game.actions;
+export const { showMoreGames, clearGames, removeGames } = game.actions;
 export default game.reducer;

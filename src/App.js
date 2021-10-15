@@ -8,13 +8,14 @@ import Login from './auth/Login';
 import Signup from './auth/Signup';
 import NavBarContainer from './NavBar';
 import PrivateRoute from './routes/PrivateRoute';
-import { remove } from './reducers/userReducer';
+import { removeUser } from './reducers/userReducer';
 import GamesContainer from './games/GamesContainer';
 import GameShow from './games/GameShow';
 import { fetchGames } from './actions/gameActions';
+import { removeGames } from './reducers/gamesReducer';
 
 const App = props => {
-  const currentUser = useSelector(state => state.users.currentUser);
+  const currentUser = useSelector(state => state.users.currentUser.data);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -24,7 +25,9 @@ const App = props => {
         await axios.get('/verifyToken');
         dispatch(fetchGames());
       } catch (err) {
-        dispatch(remove());
+        dispatch(removeUser());
+        console.log('hjere');
+        dispatch(removeGames());
         history.push('/login');
       }
     };
